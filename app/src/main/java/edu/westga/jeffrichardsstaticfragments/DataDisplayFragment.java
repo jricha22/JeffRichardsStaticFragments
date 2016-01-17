@@ -1,11 +1,13 @@
 package edu.westga.jeffrichardsstaticfragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -17,6 +19,11 @@ public class DataDisplayFragment extends Fragment {
     private double num1;
     private double num2;
     private double product;
+    private DataAddListener listener;
+
+    public interface DataAddListener {
+        void onDataAdd();
+    }
 
     public DataDisplayFragment() {
         // Required empty public constructor
@@ -37,6 +44,12 @@ public class DataDisplayFragment extends Fragment {
         this.num1 = 0.0;
         this.num2 = 0.0;
         this.product = 0.0;
+        Button addButton = (Button) theView.findViewById(R.id.btnAdd);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                addButtonClicked(v);
+            }
+        });
         return theView;
     }
 
@@ -68,5 +81,27 @@ public class DataDisplayFragment extends Fragment {
      */
     public void displayProduct() {
         this.productText.setText(Double.toString(this.product));
+    }
+
+    /**
+     * Event handler for multiply button click
+     * @param view The parent view of the event
+     */
+    private void addButtonClicked(View view) {
+        listener.onDataAdd();
+    }
+
+    /**
+     * Action taken when the fragment is attached
+     * @param context The parent context of this fragment
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof DataAddListener) {
+            this.listener = (DataAddListener) context;
+        } else {
+            throw new ClassCastException(context.toString() + " must implement DataDisplayFragment.DataAddListener");
+        }
     }
 }

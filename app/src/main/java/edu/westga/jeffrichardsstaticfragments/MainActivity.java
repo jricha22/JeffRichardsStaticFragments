@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener {
+public class MainActivity extends AppCompatActivity implements DataEntryFragment.DataEntryListener, DataDisplayFragment.DataAddListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
         });
     }
 
+    /**
+     * Create menu handler
+     * @param menu Menu being created
+     * @return True
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -35,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
         return true;
     }
 
+    /**
+     * Action bar click handler
+     * @param item Item clicked
+     * @return Status of click
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -50,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Handler for multiply button clicked in data entry fragment
+     * @param num1 First number entered
+     * @param num2 Second number entered
+     */
     @Override
     public void onDataEntry(double num1, double num2) {
         DataDisplayFragment displayFragment = (DataDisplayFragment) getSupportFragmentManager().findFragmentById(R.id.dataDisplayFragment);
@@ -57,5 +72,15 @@ public class MainActivity extends AppCompatActivity implements DataEntryFragment
         displayFragment.setNum2(num2);
         displayFragment.multiply();
         displayFragment.displayProduct();
+    }
+
+    /**
+     * Handler for add button clicked in data result fragment
+     */
+    @Override
+    public void onDataAdd() {
+        DataEntryFragment entryFragment = (DataEntryFragment) getSupportFragmentManager().findFragmentById(R.id.dataEntryFragment);
+        DataSumDisplayFragment sumFragment = (DataSumDisplayFragment) getSupportFragmentManager().findFragmentById((R.id.dataSumDisplayFragment));
+        sumFragment.displaySum(entryFragment.getNum1(), entryFragment.getNum2());
     }
 }

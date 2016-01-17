@@ -20,7 +20,7 @@ public class DataEntryFragment extends Fragment {
     private DataEntryListener listener;
 
     public interface DataEntryListener {
-        public void onDataEntry(double num1, double num2);
+        void onDataEntry(double num1, double num2);
     }
 
     /**
@@ -58,9 +58,7 @@ public class DataEntryFragment extends Fragment {
      * @param view The parent view of the event
      */
     private void multiplyButtonClicked(View view) {
-        double num1 = Double.parseDouble(this.number1.getText().toString());
-        double num2 = Double.parseDouble(this.number2.getText().toString());
-        listener.onDataEntry(num1, num2);
+        listener.onDataEntry(this.getNum1(), this.getNum2());
     }
 
     /**
@@ -74,6 +72,24 @@ public class DataEntryFragment extends Fragment {
             this.listener = (DataEntryListener) context;
         } else {
             throw new ClassCastException(context.toString() + " must implement DataEntryFragment.DataEntryListener");
+        }
+    }
+
+    public double getNum1() {
+        try
+        {
+            return Double.parseDouble(this.number1.getText().toString());
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+
+    public double getNum2() {
+        try
+        {
+            return Double.parseDouble(this.number2.getText().toString());
+        } catch (NumberFormatException e) {
+            return 0.0;
         }
     }
 }
