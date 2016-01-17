@@ -12,8 +12,25 @@
     tools:context="edu.westga.jeffrichardsstaticfragments.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="edu.westga.jeffrichardsstaticfragments.DataEntryFragment"
+            android:id="@+id/dataEntryFragment"
+            android:layout_gravity="center_horizontal"
+            tools:layout="@layout/fragment_data_entry" />
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="edu.westga.jeffrichardsstaticfragments.DataDisplayFragment"
+            android:id="@+id/dataDisplayFragment"
+            android:layout_gravity="center_horizontal"
+            tools:layout="@layout/fragment_data_display" />
+    </LinearLayout>
 </RelativeLayout>

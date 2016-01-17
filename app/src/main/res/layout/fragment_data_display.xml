@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/zero"
-        android:id="@+id/txtProduct"
+        android:text="@string/zero_double"
+        android:id="@+id/lblProduct"
         android:layout_gravity="center_horizontal" />
 
     <Button
